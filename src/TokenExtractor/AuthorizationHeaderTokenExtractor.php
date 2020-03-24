@@ -2,6 +2,8 @@
 
 namespace ByTIC\JWTAuth\TokenExtractor;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * Class AuthorizationHeaderTokenExtractor
  * @package ByTIC\JWTAuth\TokenExtractor
