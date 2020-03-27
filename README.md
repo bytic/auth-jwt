@@ -2,5 +2,5 @@
 
 
 ### Inspiration
-* https://github.com/tymondesigns/jwt-auth
+* https://github.com/tymondesigns/auth-jwt
 * https://github.com/lexik/LexikJWTAuthenticationBundle

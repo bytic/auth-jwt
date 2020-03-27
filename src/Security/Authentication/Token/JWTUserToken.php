@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\JWTAuth\Security\Authentication\Token;
+namespace ByTIC\AuthJWT\Security\Authentication\Token;
 
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -35,7 +35,9 @@ class JWTUserToken extends AbstractToken implements GuardTokenInterface
         }
 
         $this->setRawToken($rawToken);
-        $this->setAuthenticated(true);
+
+        // If the user has roles, consider it authenticated
+        $this->setAuthenticated(count($roles) > 0);
 
         $this->providerKey = $providerKey;
     }

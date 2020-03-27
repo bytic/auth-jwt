@@ -1,10 +1,10 @@
 <?php
 
-namespace ByTIC\JWTAuth\Security\Firewall;
+namespace ByTIC\AuthJWT\Security\Firewall;
 
 /**
  * Class AbstractListener
- * @package ByTIC\JWTAuth\Security\Firewall
+ * @package ByTIC\AuthJWT\Security\Firewall
  */
 abstract class AbstractListener
 {

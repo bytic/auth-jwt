@@ -1,13 +1,13 @@
 <?php
 
-namespace ByTIC\JWTAuth\Security\Firewall;
+namespace ByTIC\AuthJWT\Security\Firewall;
 
-use ByTIC\JWTAuth\TokenExtractor\TokenExtractorInterface;
+use ByTIC\AuthJWT\TokenExtractor\TokenExtractorInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class JWTListener
- * @package ByTIC\JWTAuth\Security\Firewall
+ * @package ByTIC\AuthJWT\Security\Firewall
  */
 class JWTListener extends AbstractListener
 {

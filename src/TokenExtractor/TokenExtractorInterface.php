@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\JWTAuth\TokenExtractor;
+namespace ByTIC\AuthJWT\TokenExtractor;
 
 use Symfony\Component\HttpFoundation\Request;
 
