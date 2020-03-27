@@ -2,6 +2,7 @@
 
 namespace ByTIC\AuthJWT;
 
+use ByTIC\AuthJWT\Encoder\JWTEncoder;
 use ByTIC\AuthJWT\Services\JWTProvider\LcobucciJWTProvider;
 use ByTIC\AuthJWT\Services\KeyLoader\RawKeyLoader;
 use Nip\Container\ServiceProviders\Providers\AbstractSignatureServiceProvider;
@@ -17,8 +18,21 @@ class AuthJWTServiceProvider extends AbstractSignatureServiceProvider
      */
     public function register()
     {
+        $this->registerManager();
+
         $this->registerJWTProvider();
         $this->registerKeys();
+    }
+
+    protected function registerManager()
+    {
+        $this->getContainer()->share(
+            'auth-jwt.jwt.manager',
+            function () {
+                $encoder = new JWTEncoder($this->getContainer()->get('auth-jwt.jwt.provider'));
+                return new JWTManager($encoder);
+            }
+        );
     }
 
     /**
@@ -28,8 +42,14 @@ class AuthJWTServiceProvider extends AbstractSignatureServiceProvider
      */
     protected function registerJWTProvider()
     {
-//        $this->registerNamshiProvider();
         $this->registerLcobucciProvider();
+
+        $this->getContainer()->share(
+            'auth-jwt.jwt.provider',
+            function () {
+                return $this->getContainer()->get('auth-jwt.jwt.provider.lcobucci');
+            }
+        );
     }
 
 
@@ -83,6 +103,7 @@ class AuthJWTServiceProvider extends AbstractSignatureServiceProvider
     public function provides()
     {
         return [
+            'auth-jwt.jwt.manager',
             'auth-jwt.jwt.provider',
             'auth-jwt.jwt.keys.public',
             'auth-jwt.jwt.keys.private',
@@ -98,6 +119,7 @@ class AuthJWTServiceProvider extends AbstractSignatureServiceProvider
      * @param string $default
      *
      * @return mixed
+     * @throws \Exception
      */
     protected function config($key, $default = null)
     {
